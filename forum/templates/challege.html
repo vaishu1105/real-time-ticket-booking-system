@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Challenges | Quiz Arena</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(to right, #141E30, #243B55);
+            color: white;
+            text-align: center;
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 20px;
+            border-radius: 10px;
+        }
+        .btn-custom {
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1 class="text-warning">💪 Challenge Zone 💪</h1>
+    <p>Complete challenges and boost your ranking!</p>
+
+    <div class="container">
+        <h3>🔥 Weekly Challenge: History Quiz</h3>
+        <p>Test your history knowledge and win points!</p>
+        <a href="C:\Users\thris\OneDrive\Desktop\forum\templates\quiz.html" class="btn btn-success btn-custom">Take Challenge</a>
+    </div>
+
+    <br>
+    <a href="C:\Users\thris\OneDrive\Desktop\forum\templates\knowledge.html" class="btn btn-primary btn-custom">Back to Knowledge</a>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+    if (!localStorage.getItem("userLoggedIn")) {
+        alert("You must log in or sign up first!");
+        window.location.href = "login.html";  // Redirect to login page
+    }
+    </script>
+</body>
+</html>

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Signup Page</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg,#000428, #004e92);
+        }
+        .container-fluid {
+            background-color: #fff;
+            border-radius: 10px;
+            overflow: hidden;
+            max-width: 900px;
+            width: 80%;
+            height: 500px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        .left-side {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%; 
+            width: 50%;
+            background-color: #f8f9fa;
+            padding: 10px;
+        }
+        .left-side img {
+            width: 100%;
+            height: 475px; 
+            object-fit: cover; 
+            border-radius: 8px;
+        }
+        .right-side {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            position: relative;
+        }
+        .form-container {
+            width: 90%;
+            max-width: 300px;
+        }
+        .btn-primary {
+            width: 100%;
+            border-radius: 5px;
+            padding: 8px;
+            font-size: 14px;
+            background-color: rgb(175, 231, 243);
+            color: #000;
+            border: none;
+        }
+        .college-logo {
+            position: absolute;
+            top: 10px;
+            right: -10px;
+            width: 70px; 
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-6 d-none d-md-flex left-side">
+            <img src="https://www.kgkite.ac.in/wp-content/uploads/2021/04/about-us-vid.jpg?x80136" alt="College Image">
+        </div>
+
+        <div class="col-md-6 right-side position-relative">
+            <img src="https://www.kgkite.ac.in/wp-content/themes/kgkite/images/logofoot.png?x80136" 
+                 alt="College Logo" class="college-logo">
+
+            <div class="form-container">
+                <h5 class="text-center fw-bold">Welcome! <br>Register to get started.</h5><br>
+                <form id="registerForm">
+                    <div class="mb-2">
+                        <select class="form-select" id="userType" required>
+                            <option value="">Select User Type</option>
+                            <option value="admin">Admin</option>
+                            <option value="student">Student</option>
+                        </select>
+                    </div>
+                    <div class="mb-2 input-group">
+                        <span class="input-group-text"><i class="fas fa-user"></i></span>
+                        <input type="text" class="form-control" id="username" placeholder="Username" required>
+                    </div>
+                    <div class="mb-2 input-group">
+                        <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                        <input type="email" class="form-control" id="email" placeholder="Email ID" required>
+                    </div>
+                    <div class="mb-2 input-group">
+                        <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                        <input type="password" class="form-control" id="password" placeholder="Password" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Sign Up</button>
+                </form>
+                <p class="text-center mt-2" style="font-size: 12px;">
+                    Already have an account? <a href="login.html">Login Now</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.getElementById("registerForm").addEventListener("submit", function(event) {
+        event.preventDefault();
+        
+        // Dummy account creation logic (store in localStorage)
+        const userType = document.getElementById("userType").value;
+        const username = document.getElementById("username").value;
+        const email = document.getElementById("email").value;
+        const password = document.getElementById("password").value;
+
+        if (userType && username && email && password) {
+            localStorage.setItem("userType", userType);
+            localStorage.setItem("username", username);
+            localStorage.setItem("email", email);
+            localStorage.setItem("password", password);
+
+            alert("Signup Successful! Redirecting to login...");
+            window.location.href = "login.html";
+        } else {
+            alert("Please fill all fields!");
+        }
+    });
+</script>
+
+</body>
+</html>

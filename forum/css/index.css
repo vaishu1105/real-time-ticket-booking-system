@@ -1,0 +1,65 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f8f9fa;
+}
+
+/* Header */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+    background-color: #ffffff;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.nav-links a {
+    margin: 0 15px;
+    text-decoration: none;
+    color: #007bff;
+    font-weight: bold;
+}
+
+/* Main Section */
+.main-section {
+    text-align: center;
+    margin-top: 50px;
+}
+
+.main-section h2 {
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.highlight {
+    color: #007bff;
+}
+
+/* Cards Section */
+.card {
+    width: 100%;
+    max-width: 250px;
+    border-radius: 10px;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin: auto;
+}
+
+/* Announce and Speak Section */
+.announce-card, .speak-card {
+    width: 100%;
+    max-width: 350px;
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+    margin: auto;
+}
+
+.speak-card button {
+    padding: 8px 20px;
+    font-size: 16px;
+}

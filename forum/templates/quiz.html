@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Arena</title>
+</head>
+<body style="background: linear-gradient(to right, #141E30, #243B55); color: white; text-align: center; font-family: Arial, sans-serif; padding: 20px;">
+
+    <h1 style="color: yellow;">🔥 Quiz Arena 🔥</h1>
+    <p style="font-size: 18px;">Answer the questions and test your knowledge!</p>
+
+    <div id="quiz-container" style="max-width: 500px; margin: auto; padding: 20px; background: rgba(0, 0, 0, 0.5); border-radius: 10px;">
+        <h2 id="question"></h2>
+        <div id="options"></div>
+        <button onclick="nextQuestion()" style="margin-top: 20px; padding: 10px 20px; background: yellow; border: none; cursor: pointer; font-size: 16px;">Next</button>
+    </div>
+
+    <div id="result-container" style="display: none;">
+        <h2>Your Score: <span id="score"></span></h2>
+        <button onclick="saveScore()" style="padding: 10px 20px; background: green; color: white; border: none; cursor: pointer; font-size: 16px;">Save Score</button>
+        <a href="C:\Users\thris\OneDrive\Desktop\forum\templates\knowledge.html">
+            <button style="padding: 10px 20px; background: blue; color: white; border: none; cursor: pointer; font-size: 16px; margin-left: 10px;">
+                Back to Knowledge
+            </button>
+        </a>
+</div>        
+
+    <script>
+        const questions = [
+            { question: "What is the capital of France?", options: ["Paris", "London", "Berlin", "Rome"], answer: "Paris" },
+            { question: "Which planet is known as the Red Planet?", options: ["Earth", "Mars", "Jupiter", "Venus"], answer: "Mars" },
+            { question: "Who wrote 'Harry Potter'?", options: ["J.K. Rowling", "Tolkien", "George R.R. Martin", "Shakespeare"], answer: "J.K. Rowling" },
+            { question: "What is 5 + 3?", options: ["5", "8", "10", "12"], answer: "8" },
+            { question: "Which gas do plants use for photosynthesis?", options: ["Oxygen", "Carbon Dioxide", "Nitrogen", "Hydrogen"], answer: "Carbon Dioxide" }
+        ];
+
+        let currentQuestionIndex = 0;
+        let score = 0;
+
+        function loadQuestion() {
+            let quizContainer = document.getElementById("quiz-container");
+            let questionElement = document.getElementById("question");
+            let optionsElement = document.getElementById("options");
+
+            if (currentQuestionIndex >= questions.length) {
+                quizContainer.style.display = "none";
+                document.getElementById("result-container").style.display = "block";
+                document.getElementById("score").innerText = score;
+                return;
+            }
+
+            let currentQuestion = questions[currentQuestionIndex];
+            questionElement.innerText = currentQuestion.question;
+            optionsElement.innerHTML = "";
+
+            currentQuestion.options.forEach(option => {
+                let button = document.createElement("button");
+                button.innerText = option;
+                button.style = "display: block; margin: 10px auto; padding: 10px; background: #fff; border: none; cursor: pointer;";
+                button.onclick = function () {
+                    if (option === currentQuestion.answer) {
+                        score += 10;
+                    }
+                    nextQuestion();
+                };
+                optionsElement.appendChild(button);
+            });
+        }
+
+        function nextQuestion() {
+            currentQuestionIndex++;
+            loadQuestion();
+        }
+
+        function saveScore() {
+            let playerName = prompt("Enter your name:");
+            if (!playerName) return;
+
+            let leaderboard = JSON.parse(localStorage.getItem("quizLeaderboard")) || [];
+            leaderboard.push({ name: playerName, score: score });
+
+            leaderboard.sort((a, b) => b.score - a.score);
+            localStorage.setItem("quizLeaderboard", JSON.stringify(leaderboard));
+
+            alert("Score saved! Check the leaderboard.");
+        }
+
+        loadQuestion();
+        
+    </script>
+
+</body>
+</html>

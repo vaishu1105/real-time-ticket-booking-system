@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leaderboard 🏆</title>
+</head>
+<body style="margin: 0; padding: 0; background: linear-gradient(45deg, #141E30, #243B55); color: white; font-family: 'Arial', sans-serif; text-align: center;">
+
+    <!-- Header -->
+    <header style="background: black; padding: 20px; font-size: 24px; font-weight: bold; text-transform: uppercase;">
+        🏆 Leaderboard - Top Players 🏆
+    </header>
+
+    <!-- Leaderboard Container -->
+    <div style="width: 60%; margin: 50px auto; padding: 20px; background: rgba(255, 255, 255, 0.1); border-radius: 10px; box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.3);">
+        <table style="width: 100%; border-collapse: collapse; font-size: 20px;">
+            <thead>
+                <tr style="background: #ffcc00; color: black;">
+                    <th style="padding: 15px;">Rank</th>
+                    <th>Player</th>
+                    <th>Score</th>
+                </tr>
+            </thead>
+            <tbody id="leaderboard-body" style="background: rgba(255, 255, 255, 0.2);">
+                <!-- Leaderboard Data Will Load Here -->
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Back to Home Button -->
+    <a href="C:\Users\thris\OneDrive\Desktop\forum\templates\knowledge.html" 
+        style="text-decoration: none; background: #ff5733; color: white; padding: 10px 20px; border-radius: 5px; font-size: 18px; margin-top: 20px; cursor: pointer; display: inline-block;">
+        ⬅ Back to Home
+    </a>
+
+    <!-- Leaderboard Logic (JavaScript) -->
+    <script>
+        const leaderboard = [
+            { name: "🔥 Thrisha", score: 95 },
+            { name: "💡 Alex", score: 87 },
+            { name: "🎯 Sam", score: 85 },
+            { name: "🚀 Mike", score: 78 },
+            { name: "⚡ Sarah", score: 75 }
+        ];
+
+        function loadLeaderboard() {
+            let leaderboardBody = document.getElementById("leaderboard-body");
+            leaderboardBody.innerHTML = "";
+
+            leaderboard.forEach((player, index) => {
+                let row = document.createElement("tr");
+                row.innerHTML = `
+                    <td style="padding: 15px; border-bottom: 1px solid #fff;">#${index + 1}</td>
+                    <td style="border-bottom: 1px solid #fff;">${player.name}</td>
+                    <td style="border-bottom: 1px solid #fff;">${player.score}</td>
+                `;
+                leaderboardBody.appendChild(row);
+            });
+        }
+
+        loadLeaderboard();
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Announcements</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+        .announcement {
+            padding: 15px;
+            border-bottom: 1px solid #ddd;
+        }
+        .announcement p {
+            margin: 0;
+        }
+        .category {
+            font-size: 12px;
+            padding: 3px 8px;
+            border-radius: 5px;
+            color: white;
+        }
+        .academic { background-color: #007bff; }
+        .events { background-color: #28a745; }
+        .general { background-color: #ffc107; }
+        .back-btn {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            font-size: 14px;
+            padding: 5px 10px;
+        }
+        .event-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 14px;
+            padding: 5px 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <a href="C:\Users\thris\OneDrive\Desktop\forum\templates\index.html" class="btn btn-secondary back-btn">🔙 Back</a>
+        <a href="C:\Users\thris\OneDrive\Desktop\forum\templates\event.html" class="btn btn-primary event-btn">📅 Events</a>
+        
+        <h2 class="text-center">Announcements</h2>
+        <div id="announcements"></div>
+        
+        <br>
+        <a href="C:\Users\thris\OneDrive\Desktop\forum\templates\createannouncement.html" class="btn btn-primary">➕ Create Announcement</a>
+    </div>
+
+    <script>
+        function loadAnnouncements() {
+            let announcements = JSON.parse(localStorage.getItem("announcements")) || [];
+            let announcementContainer = document.getElementById("announcements");
+            announcementContainer.innerHTML = ""; // Clear previous content
+
+            announcements.forEach((announcement) => {
+                let div = document.createElement("div");
+                div.classList.add("announcement");
+
+                div.innerHTML = `
+                    <span class="category ${announcement.category}">${announcement.category}</span>
+                    <p><strong>${announcement.title}</strong></p>
+                    <p>${announcement.content}</p>
+                    <small>Posted on: ${announcement.date}</small>
+                `;
+
+                announcementContainer.appendChild(div);
+            });
+        }
+
+        // Load announcements on page load
+        window.onload = loadAnnouncements;
+    </script>
+
+</body>
+</html>

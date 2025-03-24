@@ -1,0 +1,168 @@
+<!DOCTYPE html> 
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Forum Events</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <style>
+        body {
+            background: linear-gradient(135deg,#000428, #004e92);
+            background-size: cover;
+            position: relative;
+        }
+        body::before {
+            content: "";
+            position:absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(222, 245, 249, 0.888); 
+            backdrop-filter: blur(3px);
+            z-index: -1;
+        }
+        .container {
+            position: relative;
+            z-index: 1;
+        }
+        .event-card {
+            background: rgb(249, 250, 250);
+            border-radius: 10px;
+            padding: 15px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            width: 500px;
+            height: auto;
+            text-align: left;
+            position: relative;
+        }
+        .event-date {
+            background-color: #ffffff;
+            padding: 10px;
+            border-radius: 8px;
+            text-align: center;
+            min-width: 70px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .separator {
+            width: 2px;
+            height: 100%;
+            background-color: #ddd;
+            margin: 0 15px;
+        }
+        .event-details {
+            flex-grow: 1;
+            padding: 10px;
+        }
+        .event-details p {
+            margin: 5px 0;
+        }
+        .btn-join {
+            background-color: rgb(11, 7, 253);
+            color: white;
+            border: none;
+            padding: 8px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+            width: 100%;
+        }
+        .btn-join.clicked {
+            background-color: rgb(28, 4, 250);
+        }
+        .locked {
+            background-color: grey !important;
+            pointer-events: none;
+            cursor: not-allowed;
+        }
+        .college-logo {
+            position: absolute;
+            top: 10px;
+            right: -10px;
+            width: 70px;
+        }
+        #eventList {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-4">
+        <h2>Create Event</h2>
+        <form id="eventForm" class="mb-4">
+            <div class="row g-3">
+                <div class="col-md-2">
+                    <input type="date" id="eventDate" class="form-control" required>
+                </div>
+                <div class="col-md-3">
+                    <input type="text" id="eventName" class="form-control" placeholder="Event Name" required>
+                </div>
+                <div class="col-md-2">
+                    <input type="time" id="eventTime" class="form-control" required>
+                </div>
+                <div class="col-md-3">
+                    <input type="text" id="eventVenue" class="form-control" placeholder="Venue" required>
+                </div>
+                <div class="col-md-6">
+                    <textarea id="eventAbout" class="form-control" placeholder="About Event" required></textarea>
+                </div>
+                <div class="col-md-2">
+                    <button type="submit" class="btn btn-primary">Add Event</button>
+                </div>
+            </div>
+        </form>
+
+        <h2>All Events</h2>
+        <div id="eventList"></div>
+    </div>
+
+    <script>
+        document.getElementById('eventForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            let eventDate = document.getElementById('eventDate').value;
+            let eventName = document.getElementById('eventName').value;
+            let eventTime = document.getElementById('eventTime').value;
+            let eventVenue = document.getElementById('eventVenue').value;
+            let eventAbout = document.getElementById('eventAbout').value;
+            let eventDateTime = new Date(eventDate + ' ' + eventTime);
+            let currentTime = new Date();
+
+            let isPastEvent = eventDateTime < currentTime;
+            let status = isPastEvent ? 'Closed' : 'Open';
+            let statusIcon = isPastEvent ? '❌' : '✅';
+
+            let eventHTML = `
+                <div class="event-card">
+                    <div class="event-date">
+                        <span>${new Date(eventDate).getDate()}</span>
+                        <br>
+                        <small>${new Date(eventDate).toLocaleString('default', { weekday: 'short' })}</small>
+                    </div>
+                    <div class="separator"></div>
+                    <div class="event-details">
+                        <h5>${eventName}</h5>
+                        <p>⏰ <strong>Time:</strong> ${eventTime}</p>
+                        <p>${statusIcon} <strong>Status:</strong> ${status}</p>
+                        <p>📍 <strong>Venue:</strong> ${eventVenue}</p>
+                        <p>${eventAbout}</p>
+                        <button class="btn btn-join ${isPastEvent ? 'locked' : ''}" onclick="changeColor(this)">Request to Join</button>
+                    </div>
+                    <img src="https://www.kgkite.ac.in/wp-content/themes/kgkite/images/logofoot.png?x80136" alt="College Logo" class="college-logo">
+                </div>
+            `;
+            document.getElementById('eventList').innerHTML += eventHTML;
+            document.getElementById('eventForm').reset();
+        });
+
+        function changeColor(button) {
+            button.classList.toggle('clicked');
+        }
+    </script>
+</body>
+</html>
